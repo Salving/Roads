@@ -1,5 +1,7 @@
 package salving.roads.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -9,6 +11,9 @@ import salving.roads.repository.AuthenticationTokenRepository;
 import salving.roads.repository.NotesRepository;
 import salving.roads.repository.ProblemPointRepository;
 import salving.roads.utils.AuthUtils;
+
+import java.io.BufferedOutputStream;
+import java.io.OutputStream;
 
 @Controller
 public class MapController {
@@ -21,6 +26,10 @@ public class MapController {
 
     @Autowired
     public AuthenticationTokenRepository authRepository;
+
+    private String serializePoint(ProblemPoint point) throws JsonProcessingException {
+        return new ObjectMapper().writeValueAsString(point);
+    }
 
     @ResponseBody
     @RequestMapping("/map/point/add")
@@ -49,10 +58,15 @@ public class MapController {
         }
 
         if (pointRepository.existsByLatitudeAndLongitude(latitude, longitude)) {
-            return String.valueOf(pointRepository.findByLatitudeAndLongitude(latitude, longitude).getId());
+            try {
+                return serializePoint(pointRepository.findByLatitudeAndLongitude(latitude, longitude));
+            } catch (JsonProcessingException e) {
+                return "Error";
+            }
         } else {
             return "Point not found";
         }
+
 
     }
 
@@ -65,13 +79,11 @@ public class MapController {
         }
 
         if (pointRepository.existsById(id)) {
-            ProblemPoint point = pointRepository.findById(id);
-
-            StringBuilder sb = new StringBuilder();
-            sb.append(String.format("Latitude - %s |", point.getLatitude()));
-            sb.append(String.format("Longitude - %s |", point.getLongitude()));
-
-            return sb.toString();
+            try {
+                return serializePoint(pointRepository.findById(id));
+            } catch (JsonProcessingException e) {
+                return "Error";
+            }
         } else {
             return "Point not Found";
         }

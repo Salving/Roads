@@ -1,5 +1,7 @@
 package salving.roads.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -46,12 +48,11 @@ public class AuthenticationController {
         StringBuilder sb = new StringBuilder();
 
         if(userRepository.existsUserByLogin(login)) {
-            User user = userRepository.findUserByLogin(login);
-
-            sb.append(String.format("Login - %s | ", user.getLogin()));
-            sb.append(String.format("Email - %s | ", user.getEmail()));
-
-            return sb.toString();
+            try {
+                return new ObjectMapper().writeValueAsString(userRepository.findUserByLogin(login));
+            } catch (JsonProcessingException e) {
+                return "Error";
+            }
         }
 
         return "User does not exists";
