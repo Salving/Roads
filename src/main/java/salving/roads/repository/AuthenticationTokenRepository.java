@@ -2,10 +2,11 @@ package salving.roads.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import salving.roads.domain.AuthenticationToken;
+import salving.roads.domain.User;
 
 public interface AuthenticationTokenRepository extends CrudRepository<AuthenticationToken, Long> {
-    AuthenticationToken findAuthenticationTokenByLogin(String login);
+    AuthenticationToken findAuthenticationTokenByUser(User user);
     AuthenticationToken findAuthenticationTokenByAuthenticationString(String string);
-    boolean existsAuthenticationTokenByLogin(String login);
+    boolean existsAuthenticationTokenByUser(User user);
     boolean existsAuthenticationTokenByAuthenticationString(String string);
 }

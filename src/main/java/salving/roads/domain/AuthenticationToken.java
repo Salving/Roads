@@ -13,8 +13,9 @@ public class AuthenticationToken implements Serializable {
     @Column(unique = true, nullable = false, name = "id")
     private long id;
 
-    @Column(unique = true, nullable = false, name = "login")
-    private String login;
+    @OneToOne(optional = false, targetEntity = User.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Column(unique = true, nullable = false, name = "auth")
     private String authenticationString;
@@ -25,8 +26,8 @@ public class AuthenticationToken implements Serializable {
 
     protected AuthenticationToken() { }
 
-    public AuthenticationToken(String login, String authenticationString, Date expirationDate) {
-        this.login = login;
+    public AuthenticationToken(User user, String authenticationString, Date expirationDate) {
+        this.user = user;
         this.authenticationString = authenticationString;
         this.expirationDate = expirationDate;
     }
@@ -39,12 +40,12 @@ public class AuthenticationToken implements Serializable {
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public User getUser() {
+        return user;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getAuthenticationString() {

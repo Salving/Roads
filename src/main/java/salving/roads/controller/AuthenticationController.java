@@ -1,27 +1,28 @@
 package salving.roads.controller;
 
-import org.h2.util.DateTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import salving.roads.domain.AuthenticationToken;
 import salving.roads.domain.User;
 import salving.roads.repository.AuthenticationTokenRepository;
 import salving.roads.repository.UserRepository;
-import salving.roads.utils.HashUtils;
-import salving.roads.utils.TimeUtils;
-
-import java.util.Calendar;
-import java.util.Date;
+import salving.roads.service.AuthenticationTokenService;
 
 @Controller
 public class AuthenticationController {
 
     @Autowired
-    public UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Autowired
-    public AuthenticationTokenRepository authenticationTokenRepository;
+    private AuthenticationTokenRepository authenticationTokenRepository;
+
+    @Autowired
+    private AuthenticationTokenService authTokenService;
 
     @ResponseBody
     @RequestMapping("/user/register")
@@ -64,12 +65,11 @@ public class AuthenticationController {
             User user = userRepository.findUserByLogin(login);
 
             if (user.getPassword().equals(password)) {
-                if (authenticationTokenRepository.existsAuthenticationTokenByLogin(login)) {
-                    authenticationTokenRepository.delete(authenticationTokenRepository.findAuthenticationTokenByLogin(login));
+                if (authenticationTokenRepository.existsAuthenticationTokenByUser(user)) {
+                    authenticationTokenRepository.delete(authenticationTokenRepository.findAuthenticationTokenByUser(user));
                 }
-                String authString = HashUtils.Hash(login, String.valueOf(System.currentTimeMillis()).getBytes());
 
-                AuthenticationToken token = new AuthenticationToken(login, authString, TimeUtils.tomorrow());
+                AuthenticationToken token = authTokenService.getNewAuthenticationToken(user);
                 authenticationTokenRepository.save(token);
 
                 return token.getAuthenticationString();

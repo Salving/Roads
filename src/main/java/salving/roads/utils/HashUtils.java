@@ -15,8 +15,14 @@ public class HashUtils {
             md.update(bytes);
             byte[] hash = md.digest();
 
-            for (int i = 0; i < bytes.length; i++) {
-                bytes[i] = (byte) Math.abs(bytes[i]);
+            for (int i = 0; i < hash.length; i++) {
+                hash[i] = (byte) Math.abs(hash[i]);
+                if (hash[i] == "/n".getBytes(StandardCharsets.UTF_8)[0]) {
+                    hash[i] = 70;
+                }
+                if (hash[i] <= 20) {
+                    hash[i] = (byte) (hash[i] + 21);
+                }
             }
 
             return new String(hash, StandardCharsets.UTF_8);
