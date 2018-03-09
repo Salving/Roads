@@ -40,6 +40,46 @@ public class MapController {
     }
 
     @ResponseBody
+    @RequestMapping("/map/point/get")
+    public String getPointByLatAndLong(@RequestHeader(name = "authString") String auth,
+                                       @RequestParam("latitude") long latitude,
+                                       @RequestParam("longitude") long longitude) {
+        if(!AuthUtils.authTokenIsValid(authRepository, auth)) {
+            return "User not authorized";
+        }
+
+        if (pointRepository.existsByLatitudeAndLongitude(latitude, longitude)) {
+            return String.valueOf(pointRepository.findByLatitudeAndLongitude(latitude, longitude).getId());
+        } else {
+            return "Point not found";
+        }
+
+    }
+
+    @ResponseBody
+    @RequestMapping("/map/point/get/{id}")
+    public String getPointById(@RequestHeader(name = "authString") String auth,
+                               @PathVariable("id") long id) {
+        if(!AuthUtils.authTokenIsValid(authRepository, auth)) {
+            return "User not authorized";
+        }
+
+        if (pointRepository.existsById(id)) {
+            ProblemPoint point = pointRepository.findById(id);
+
+            StringBuilder sb = new StringBuilder();
+            sb.append(String.format("Latitude - %s |", point.getLatitude()));
+            sb.append(String.format("Longitude - %s |", point.getLongitude()));
+
+            return sb.toString();
+        } else {
+            return "Point not Found";
+        }
+
+
+    }
+
+    @ResponseBody
     @RequestMapping("/map/point/{id}/delete")
     public String removePoint(@RequestHeader(name = "authString") String auth,
                               @PathVariable("id") long id) {

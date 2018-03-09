@@ -29,6 +29,18 @@
 | latitude | authString |
 | longitude |  |
 
+##### /map/point/get{id}
+
+| Parameters | Headers |
+| -----------|-------- |
+|  | authString |
+
+##### /map/point/get
+
+| Parameters | Headers |
+| -----------|-------- |
+| latitude | authString |
+| longitude |  |
 
 ##### /map/point/{id}/delete
 
