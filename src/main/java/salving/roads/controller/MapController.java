@@ -23,8 +23,8 @@ public class MapController {
     public AuthenticationTokenRepository authRepository;
 
     @ResponseBody
-    @RequestMapping("/map/points/add")
-    public String addPoint(@RequestHeader(name = "authToken") String auth,
+    @RequestMapping("/map/point/add")
+    public String addPoint(@RequestHeader(name = "authString") String auth,
                            @RequestParam("latitude") double latitude,
                            @RequestParam("longitude") double longitude) {
         if(!AuthUtils.authTokenIsValid(authRepository, auth)) {
@@ -40,8 +40,8 @@ public class MapController {
     }
 
     @ResponseBody
-    @RequestMapping("/map/points/{id}/delete")
-    public String removePoint(@RequestHeader(name = "authToken") String auth,
+    @RequestMapping("/map/point/{id}/delete")
+    public String removePoint(@RequestHeader(name = "authString") String auth,
                               @PathVariable("id") long id) {
         if(!AuthUtils.authTokenIsValid(authRepository, auth)) {
             return "User not authorized";
@@ -56,8 +56,8 @@ public class MapController {
     }
 
     @ResponseBody
-    @RequestMapping("/map/points/{id}/notes/add")
-    public String addNote(@RequestHeader(name = "authToken") String auth,
+    @RequestMapping("/map/point/{id}/note/add")
+    public String addNote(@RequestHeader(name = "authString") String auth,
                           @PathVariable("id") long id,
                           @RequestParam("text") String text) {
         if(!AuthUtils.authTokenIsValid(authRepository, auth)) {
@@ -79,8 +79,8 @@ public class MapController {
     }
 
     @ResponseBody
-    @RequestMapping("/map/points/{id}/notes/{noteId}/remove")
-    public String removeNote(@RequestHeader(name = "authToken") String auth,
+    @RequestMapping("/map/point/{id}/note/{noteId}/remove")
+    public String removeNote(@RequestHeader(name = "authString") String auth,
                              @PathVariable("id") long id,
                              @PathVariable("noteId") long noteId) {
         if(!AuthUtils.authTokenIsValid(authRepository, auth)) {
