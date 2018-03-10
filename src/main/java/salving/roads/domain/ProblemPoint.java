@@ -1,7 +1,11 @@
 package salving.roads.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import salving.roads.utils.TimeUtils;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -22,6 +26,10 @@ public class ProblemPoint implements Serializable {
     @Column(nullable = false, name = "rating", columnDefinition = "long default '1'")
     private int rating ;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = TimeUtils.DATE_FORMAT)
+    @Column(nullable = false, name = "creation_time")
+    private Date creationDate;
+
     @OneToMany(mappedBy = "point")
     private List<Note> notes;
 
@@ -36,6 +44,7 @@ public class ProblemPoint implements Serializable {
         this.latitude = latitude;
         this.longitude = longitude;
         this.rating = rating;
+        this.creationDate = new Date();
     }
 
     public long getId() {
@@ -68,5 +77,13 @@ public class ProblemPoint implements Serializable {
 
     public void setRating(int rating) {
         this.rating = rating;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
     }
 }

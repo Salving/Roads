@@ -2,6 +2,7 @@ package salving.roads.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.h2.util.DateTimeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -10,26 +11,31 @@ import salving.roads.domain.ProblemPoint;
 import salving.roads.repository.AuthenticationTokenRepository;
 import salving.roads.repository.NotesRepository;
 import salving.roads.repository.ProblemPointRepository;
+import salving.roads.service.JsonParseService;
 import salving.roads.utils.AuthUtils;
+import salving.roads.utils.TimeUtils;
 
 import java.io.BufferedOutputStream;
 import java.io.OutputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 
 @Controller
 public class MapController {
 
     @Autowired
-    public ProblemPointRepository pointRepository;
+    private ProblemPointRepository pointRepository;
 
     @Autowired
-    public NotesRepository notesRepository;
+    private NotesRepository notesRepository;
 
     @Autowired
-    public AuthenticationTokenRepository authRepository;
+    private AuthenticationTokenRepository authRepository;
 
-    private String serializePoint(ProblemPoint point) throws JsonProcessingException {
-        return new ObjectMapper().writeValueAsString(point);
-    }
+    @Autowired
+    private JsonParseService jsonParseService;
 
     @ResponseBody
     @RequestMapping("/map/point/add")
@@ -59,14 +65,13 @@ public class MapController {
 
         if (pointRepository.existsByLatitudeAndLongitude(latitude, longitude)) {
             try {
-                return serializePoint(pointRepository.findByLatitudeAndLongitude(latitude, longitude));
+                return jsonParseService.serialize(pointRepository.findByLatitudeAndLongitude(latitude, longitude));
             } catch (JsonProcessingException e) {
                 return "Error";
             }
         } else {
             return "Point not found";
         }
-
 
     }
 
@@ -80,7 +85,7 @@ public class MapController {
 
         if (pointRepository.existsById(id)) {
             try {
-                return serializePoint(pointRepository.findById(id));
+                return jsonParseService.serialize(pointRepository.findById(id));
             } catch (JsonProcessingException e) {
                 return "Error";
             }
@@ -88,7 +93,33 @@ public class MapController {
             return "Point not Found";
         }
 
+    }
 
+    @ResponseBody
+    @RequestMapping("/map/point/get/after")
+    public String getAllPointsAfterDate(@RequestHeader(name = "authString") String auth,
+                                        @RequestParam("date") String date) {
+        if(!AuthUtils.authTokenIsValid(authRepository, auth)) {
+            return "User not authorized";
+        }
+
+        Date after;
+        try {
+            after = new SimpleDateFormat(TimeUtils.DATE_FORMAT).parse(date);
+        } catch (ParseException e) {
+            return "Error";
+        }
+        List<ProblemPoint> points = pointRepository.findAllByCreationDateAfter(after);
+
+        if (points.isEmpty()) {
+            return "Points not found";
+        } else {
+            try {
+                return jsonParseService.serialize(points);
+            } catch (JsonProcessingException e) {
+                return "Error";
+            }
+        }
     }
 
     @ResponseBody
