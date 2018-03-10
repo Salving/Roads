@@ -13,6 +13,7 @@ import salving.roads.domain.User;
 import salving.roads.repository.AuthenticationTokenRepository;
 import salving.roads.repository.UserRepository;
 import salving.roads.service.AuthenticationTokenService;
+import salving.roads.service.JsonParseService;
 
 @Controller
 public class AuthenticationController {
@@ -25,6 +26,9 @@ public class AuthenticationController {
 
     @Autowired
     private AuthenticationTokenService authTokenService;
+
+    @Autowired
+    private JsonParseService jsonParseService;
 
     @ResponseBody
     @RequestMapping("/user/register")
@@ -49,7 +53,7 @@ public class AuthenticationController {
 
         if(userRepository.existsUserByLogin(login)) {
             try {
-                return new ObjectMapper().writeValueAsString(userRepository.findUserByLogin(login));
+                return jsonParseService.serialize(userRepository.findUserByLogin(login));
             } catch (JsonProcessingException e) {
                 return "Error";
             }
