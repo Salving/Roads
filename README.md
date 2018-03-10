@@ -42,6 +42,13 @@
 | latitude | authString |
 | longitude |  |
 
+##### /map/point/get/after
+| Parameters | Headers |
+| -----------|-------- |
+| date | authString |
+
+date format - "yyyy-MM-dd HH:mm:ss.SS"
+
 ##### /map/point/{id}/delete
 
 | Parameters | Headers |
