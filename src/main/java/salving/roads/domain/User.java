@@ -24,6 +24,9 @@ public class User implements Serializable {
     @Column(unique = true, nullable = false, name = "email")
     private String email;
 
+    @Column(unique = true, nullable = false, name = "points")
+    private int points;
+
     protected  User() {}
 
     public User(String login, String password, String email) {
@@ -62,5 +65,13 @@ public class User implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
     }
 }

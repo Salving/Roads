@@ -14,5 +14,7 @@ dependencies {
     compile "com.h2database:h2:1.4.196"
     compile "com.fasterxml.jackson.core:jackson-databind:2.9.4"
     testCompile 'org.springframework.boot:spring-boot-starter-test:1.5.9.RELEASE'
+    compile "org.freemarker:freemarker:2.3.20"
 //    testCompile "junit:junit:4.12"
+
 }
