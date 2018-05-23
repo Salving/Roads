@@ -24,8 +24,8 @@ public class User implements Serializable {
     @Column(unique = true, nullable = false, name = "email")
     private String email;
 
-    @Column(unique = true, nullable = false, name = "points")
-    private int points;
+    @Column(nullable = false, name = "points", columnDefinition = "long default '0'")
+    private long points;
 
     protected  User() {}
 
@@ -67,7 +67,7 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public int getPoints() {
+    public long getPoints() {
         return points;
     }
 
