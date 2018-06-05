@@ -6,19 +6,16 @@ import freemarker.template.TemplateException;
 import freemarker.template.TemplateExceptionHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ResourceUtils;
+import org.xml.sax.InputSource;
 import salving.roads.domain.ProblemPoint;
 import salving.roads.repository.NotesRepository;
 import salving.roads.repository.ProblemPointRepository;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import java.io.File;
-import java.io.IOException;
-import java.io.StringWriter;
-import java.io.Writer;
+import java.io.*;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,13 +35,9 @@ public class MailService {
     public MailService() {
         cfg = new Configuration();
 
-        try {
-            ClassLoader cl = getClass().getClassLoader();
-            File dir = new File(cl.getResource("templates").toURI());
-            cfg.setDirectoryForTemplateLoading(dir);
-        } catch (IOException | URISyntaxException e) {
-            e.printStackTrace();
-        }
+        ClassLoader cl = getClass().getClassLoader();
+
+        cfg.setClassForTemplateLoading(cl.getClass(), "templates");
         cfg.setDefaultEncoding("UTF-8");
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
     }

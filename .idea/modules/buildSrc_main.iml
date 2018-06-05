@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id="buildSrc:main" external.linked.project.path="$MODULE_DIR$/../../buildSrc" external.root.project.path="$MODULE_DIR$/../.." external.system.id="GRADLE" external.system.module.group="" external.system.module.type="sourceSet" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
+    <output url="file://$MODULE_DIR$/../../buildSrc/out/production/classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../buildSrc/src/main">
+      <sourceFolder url="file://$MODULE_DIR$/../../buildSrc/src/main/groovy" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../buildSrc/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/../../buildSrc/src/main/resources" type="java-resource" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/3.5/generated-gradle-jars/gradle-api-3.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/announce" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/antlr" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/base-services" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/base-services-groovy" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/build-cache-http" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/build-comparison" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/build-init" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/cli" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/code-quality" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/composite-builds" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/core" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/dependency-management" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/diagnostics" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/ear" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/ide" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/ide-native" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/ide-play" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/installation-beacon" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/internal-android-performance-testing" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/internal-integ-testing" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/internal-performance-testing" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/internal-testing" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/ivy" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/jacoco" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/javascript" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/jetty" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/jvm-services" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/language-groovy" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/language-java" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/language-jvm" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/language-native" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/language-scala" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/launcher" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/logging" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/maven" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/messaging" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/model-core" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/model-groovy" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/native" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/open-api" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/osgi" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/platform-base" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/platform-jvm" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/platform-native" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/platform-play" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/plugin-development" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/plugin-use" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/plugins" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/process-services" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/publish" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/reporting" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/resources" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/resources-http" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/resources-s3" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/resources-sftp" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/scala" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/signing" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/test-kit" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/testing-base" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/testing-jvm" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/testing-native" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/tooling-api" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/tooling-api-builders" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/ui" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/workers" />
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/wrapper" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/Program Files/Gradle/gradle-3.5/lib/groovy-all-2.4.10.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/Program Files/Gradle/gradle-3.5/lib/gradle-installation-beacon-3.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://C:/Program Files/Gradle/gradle-3.5/src/installation-beacon" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$USER_HOME$/.gradle/caches/3.5/generated-gradle-jars/gradle-api-3.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://C:/Program Files/Gradle/gradle-3.5/lib/gradle-installation-beacon-3.5.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+  </component>
+</module>
