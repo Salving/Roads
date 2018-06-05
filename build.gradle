@@ -28,6 +28,11 @@ dependencies {
     compile "com.fasterxml.jackson.core:jackson-databind:2.9.4"
     testCompile 'org.springframework.boot:spring-boot-starter-test:1.5.9.RELEASE'
     compile "org.freemarker:freemarker:2.3.20"
+    compile group: 'javax.mail', name: 'javax.mail-api', version: '1.5.1'
+    compile "com.sun.mail:javax.mail:1.5.1"
+
+
+
 //    testCompile "junit:junit:4.12"
 
 }

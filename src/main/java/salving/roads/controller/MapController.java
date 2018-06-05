@@ -48,7 +48,7 @@ public class MapController {
 
         if (!pointRepository.existsByLatitudeAndLongitude(latitude, longitude)) {
             pointRepository.save(new ProblemPoint(latitude, longitude));
-            return ("Point saved | Id:" + pointRepository.findByLatitudeAndLongitude(latitude, longitude).getId());
+            return String.valueOf(pointRepository.findByLatitudeAndLongitude(latitude, longitude).getId());
         }
 
         return "0";
@@ -57,8 +57,8 @@ public class MapController {
     @ResponseBody
     @RequestMapping("/map/point/get")
     public String getPointByLatAndLong(@RequestHeader(name = "authString") String auth,
-                                       @RequestParam("latitude") long latitude,
-                                       @RequestParam("longitude") long longitude) {
+                                       @RequestParam("latitude") double latitude,
+                                       @RequestParam("longitude") double longitude) {
         if(!AuthUtils.authTokenIsValid(authRepository, auth)) {
             return "User not authorized";
         }
