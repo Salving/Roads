@@ -11,7 +11,7 @@ public class AuthenticationTokenService {
 
     public AuthenticationToken getNewAuthenticationToken(User user){
         String authString = HashUtils.Hash(user.getLogin(), String.valueOf(System.currentTimeMillis()).getBytes());
-        return new AuthenticationToken(user, authString, TimeUtils.tomorrow());
+        return new AuthenticationToken(user, authString, TimeUtils.nextMonth());
     }
 
 }

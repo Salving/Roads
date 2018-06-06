@@ -14,4 +14,11 @@ public class TimeUtils {
         return cal.getTime();
     }
 
+    public static Date nextMonth() {
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(System.currentTimeMillis());
+        cal.add(Calendar.MONTH, 1);
+        return cal.getTime();
+    }
+
 }

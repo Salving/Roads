@@ -69,7 +69,7 @@ public class AuthenticationControllerTest {
     @BeforeClass
     public static void setUpClass() {
         user = new User(login, password, email);
-        token = new AuthenticationToken(user, authString, TimeUtils.tomorrow());
+        token = new AuthenticationToken(user, authString, TimeUtils.nextMonth());
     }
 
     @After
