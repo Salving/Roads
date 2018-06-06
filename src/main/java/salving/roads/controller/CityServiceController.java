@@ -26,19 +26,19 @@ public class CityServiceController {
     public String sendComplaint(@RequestHeader(name = "authString") String auth,
                                 @PathVariable("id") long id) {
         if (!pointRepository.existsById(id)) {
-            return "Point not found";
+            return "Point_not_found";
         }
         if(!AuthUtils.authTokenIsValid(authRepository, auth)) {
-            return "User not authorized";
+            return "User_not_authorized";
         }
 
         String message = mailService.buildMessage(id);
         if(!message.equals("Point not found")) {
             mailService.send(message, "pmfr@yandex.ru");
             mailService.send(message, "sergey.2123@yandex.ru");
-            return "mMessage sent successfully";
+            return "Message_sent_successfully";
         } else {
-            return "Point not found";
+            return "Point_not_found";
         }
     }
 

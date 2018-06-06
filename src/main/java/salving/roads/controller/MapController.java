@@ -43,7 +43,7 @@ public class MapController {
                            @RequestParam("latitude") double latitude,
                            @RequestParam("longitude") double longitude) {
         if(!AuthUtils.authTokenIsValid(authRepository, auth)) {
-            return "User not authorized";
+            return "User_not_authorized";
         }
 
         if (!pointRepository.existsByLatitudeAndLongitude(latitude, longitude)) {
@@ -60,7 +60,7 @@ public class MapController {
                                        @RequestParam("latitude") double latitude,
                                        @RequestParam("longitude") double longitude) {
         if(!AuthUtils.authTokenIsValid(authRepository, auth)) {
-            return "User not authorized";
+            return "User_not_authorized";
         }
 
         if (pointRepository.existsByLatitudeAndLongitude(latitude, longitude)) {
@@ -70,7 +70,7 @@ public class MapController {
                 return "Error";
             }
         } else {
-            return "Point not found";
+            return "Point_not_found";
         }
 
     }
@@ -80,7 +80,7 @@ public class MapController {
     public String getPointById(@RequestHeader(name = "authString") String auth,
                                @PathVariable("id") long id) {
         if(!AuthUtils.authTokenIsValid(authRepository, auth)) {
-            return "User not authorized";
+            return "User_not_authorized";
         }
 
         if (pointRepository.existsById(id)) {
@@ -90,7 +90,7 @@ public class MapController {
                 return "Error";
             }
         } else {
-            return "Point not Found";
+            return "Point_not_Found";
         }
 
     }
@@ -100,7 +100,7 @@ public class MapController {
     public String getAllPointsAfterDate(@RequestHeader(name = "authString") String auth,
                                         @RequestParam("date") String date) {
         if(!AuthUtils.authTokenIsValid(authRepository, auth)) {
-            return "User not authorized";
+            return "User_not_authorized";
         }
 
         Date after;
@@ -112,7 +112,7 @@ public class MapController {
         List<ProblemPoint> points = pointRepository.findAllByCreationDateAfter(after);
 
         if (points.isEmpty()) {
-            return "Points not found";
+            return "Points_not_found";
         } else {
             try {
                 return jsonParseService.serialize(points);
@@ -127,12 +127,12 @@ public class MapController {
     public String removePoint(@RequestHeader(name = "authString") String auth,
                               @PathVariable("id") long id) {
         if(!AuthUtils.authTokenIsValid(authRepository, auth)) {
-            return "User not authorized";
+            return "User_not_authorized";
         }
 
         if (!pointRepository.existsById(id)) {
             pointRepository.delete(id);
-            return "Point deleted";
+            return "Point_deleted";
         }
 
         return "0";
@@ -144,20 +144,20 @@ public class MapController {
                           @PathVariable("id") long id,
                           @RequestParam("text") String text) {
         if(!AuthUtils.authTokenIsValid(authRepository, auth)) {
-            return "User not authorized";
+            return "User_not_authorized";
         }
 
         if (!pointRepository.existsById(id)) {
-            return "Point do not exist";
+            return "Point_do_not_exist";
         }
 
         if (!notesRepository.existsNoteByText(text)) {
             Note note = new Note(text, pointRepository.findById(id));
             notesRepository.save(note);
-            return "Note saved";
+            return "Note_saved";
 
         } else {
-            return "Note already exists";
+            return "Note_already_exists";
         }
     }
 
@@ -167,19 +167,19 @@ public class MapController {
                              @PathVariable("id") long id,
                              @PathVariable("noteId") long noteId) {
         if(!AuthUtils.authTokenIsValid(authRepository, auth)) {
-            return "User not authorized";
+            return "User_not_authorized";
         }
 
         if (!pointRepository.existsById(id)) {
-            return "Point not found";
+            return "Point_not_found";
         }
 
         if (!notesRepository.existsNoteById(noteId)) {
-            return "Can't find note";
+            return "Can't_find_note";
         }
 
         notesRepository.delete(noteId);
-        return "Note deleted";
+        return "Note_deleted";
 
     }
 

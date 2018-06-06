@@ -36,14 +36,14 @@ public class AuthenticationController {
                                @RequestParam("password") String password,
                                @RequestParam("email") String email) {
         if(userRepository.existsUserByLogin(login)) {
-            return "Login already registered";
+            return "Login_already_registered";
         } else if(userRepository.existsUserByEmail(email)) {
-            return "Email already registered";
+            return "Email_already_registered";
         }
 
         userRepository.save(new User(login, password, email));
 
-        return "User registered";
+        return "User_registered";
     }
 
     @ResponseBody
@@ -59,7 +59,7 @@ public class AuthenticationController {
             }
         }
 
-        return "User does not exists";
+        return "User_does_not_exists";
     }
 
     @ResponseBody
@@ -81,6 +81,6 @@ public class AuthenticationController {
             }
         }
 
-        return "Authentication failed";
+        return "Authentication_failed";
     }
 }
