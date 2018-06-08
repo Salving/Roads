@@ -12,4 +12,5 @@ public interface NotesRepository extends CrudRepository<Note, Long> {
 
     boolean existsNoteById(long id);
     boolean existsNoteByText(String text);
+    boolean existsNoteByIdAndText(long id, String text);
 }

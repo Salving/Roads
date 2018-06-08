@@ -152,7 +152,7 @@ public class MapController {
             return "Point_do_not_exist";
         }
 
-        if (!notesRepository.existsNoteByText(text)) {
+        if (!notesRepository.existsNoteByIdAndText(id, text)) {
             Note note = new Note(text, pointRepository.findById(id));
             notesRepository.save(note);
             return "Note_saved";

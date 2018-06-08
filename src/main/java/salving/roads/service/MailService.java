@@ -37,7 +37,7 @@ public class MailService {
 
         ClassLoader cl = getClass().getClassLoader();
 
-        cfg.setClassForTemplateLoading(cl.getClass(), "templates");
+        cfg.setClassForTemplateLoading(cl.getClass(), "/templates");
         cfg.setDefaultEncoding("UTF-8");
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
     }
@@ -83,12 +83,11 @@ public class MailService {
 
     public String buildMessage(long id) {
         if (pointRepository.existsById(id)) {
-            StringBuilder message = new StringBuilder();
             ProblemPoint point = pointRepository.findById(id);
 
             Map<String, Object> root = new HashMap<>();
-            root.put("longitude", point.getLongitude());
-            root.put("latitude", point.getLatitude());
+            root.put("longitude", String.valueOf(point.getLongitude()));
+            root.put("latitude", String.valueOf(point.getLatitude()));
             root.put("notes", notesRepository.findNotesByPointId(id));
 
             Writer writer = new StringWriter();
