@@ -20,11 +20,15 @@ public class HashUtils {
                 if (hash[i] == "/n".getBytes(StandardCharsets.UTF_8)[0]) {
                     hash[i] = 70;
                 }
-                if (hash[i] <= 48) {
-                    hash[i] = (byte) (hash[i] + 49);
+                if (hash[i] <= 65) {
+                    hash[i] = (byte) (hash[i] + 66);
                 }
-                hash[i] -= 48;
-                hash[i] = (byte) ((hash[i]%77) + 48);
+                hash[i] -= 65;
+                hash[i] = (byte) ((hash[i]%57) + 65);
+
+                if (hash[i] >= 91 && hash[i] <= 96) {
+                    hash[i] -= 7;
+                }
 
             }
 

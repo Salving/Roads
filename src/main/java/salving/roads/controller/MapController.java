@@ -51,6 +51,7 @@ public class MapController {
             return String.valueOf(pointRepository.findByLatitudeAndLongitude(latitude, longitude).getId());
         }
 
+
         return "0";
     }
 
