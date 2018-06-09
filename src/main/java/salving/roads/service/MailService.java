@@ -43,7 +43,7 @@ public class MailService {
     }
 
     public void send(String text, String to) {
-        String from = "r3com.service@yandex.ru";
+        String from = "recom.email.service@yandex.ru";
         String host = "smtp.yandex.ru";
 
         Properties properties = System.getProperties();
@@ -58,8 +58,8 @@ public class MailService {
         Authenticator auth = new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                String username = "r3com.service";
-                String password = "Ntr89oP";
+                String username = "recom.email.service";
+                String password = "1QwertY1";
                 return new PasswordAuthentication(username, password);
             }
         };
