@@ -13,7 +13,7 @@ public class AuthenticationToken implements Serializable {
     @Column(unique = true, nullable = false, name = "id")
     private long id;
 
-    @OneToOne(optional = false, targetEntity = User.class, fetch = FetchType.LAZY)
+    @OneToOne(optional = false, targetEntity = User.class, fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 

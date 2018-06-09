@@ -18,16 +18,17 @@ public class Note {
     @JoinColumn(name = "point_id")
     private ProblemPoint point;
 
-    @ManyToOne(optional = false, targetEntity = User.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "author")
+    @ManyToOne(optional = false, targetEntity = User.class)
+    @JoinColumn(name = "author_id")
     private User author;
 
     protected Note() {
     }
 
-    public Note(String text, ProblemPoint point_id) {
+    public Note(String text, ProblemPoint point_id, User author) {
         this.text = text;
         this.point = point_id;
+        this.author = author;
     }
 
     public long getId() {
@@ -52,5 +53,13 @@ public class Note {
 
     public void setPoint(ProblemPoint point) {
         this.point = point;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
     }
 }

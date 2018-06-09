@@ -3,6 +3,7 @@ package salving.roads.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import salving.roads.domain.User;
 import salving.roads.repository.AuthenticationTokenRepository;
 import salving.roads.repository.NotesRepository;
 import salving.roads.repository.ProblemPointRepository;
@@ -32,7 +33,10 @@ public class CityServiceController {
             return "User_not_authorized";
         }
 
-        String message = mailService.buildMessage(id);
+        User user = authRepository.findAuthenticationTokenByAuthenticationString(auth).getUser();
+
+
+        String message = mailService.buildUserMessage(id, user);
         if(!message.equals("Point not found")) {
             mailService.send(message, "pmfr@yandex.ru");
             mailService.send(message, "sergey.2123@yandex.ru");

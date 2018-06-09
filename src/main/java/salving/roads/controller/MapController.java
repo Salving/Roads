@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import salving.roads.domain.Note;
 import salving.roads.domain.ProblemPoint;
+import salving.roads.domain.User;
 import salving.roads.repository.AuthenticationTokenRepository;
 import salving.roads.repository.NotesRepository;
 import salving.roads.repository.ProblemPointRepository;
@@ -131,9 +132,15 @@ public class MapController {
             return "User_not_authorized";
         }
 
-        if (!pointRepository.existsById(id)) {
-            pointRepository.delete(id);
-            return "Point_deleted";
+        if (pointRepository.existsById(id)) {
+            ProblemPoint point = pointRepository.findById(id);
+            if (point.getNotes().isEmpty()) {
+                pointRepository.delete(id);
+                return "Point_deleted";
+            } else {
+                return "Point_has_Notes";
+            }
+
         }
 
         return "0";
@@ -152,11 +159,12 @@ public class MapController {
             return "Point_do_not_exist";
         }
 
-        if (!notesRepository.existsNoteByIdAndText(id, text)) {
-            Note note = new Note(text, pointRepository.findById(id));
+        User user = authRepository.findAuthenticationTokenByAuthenticationString(auth).getUser();
+
+        if (!notesRepository.existsNoteByPointAndText(pointRepository.findById(id), text)) {
+            Note note = new Note(text, pointRepository.findById(id), user);
             notesRepository.save(note);
             return "Note_saved";
-
         } else {
             return "Note_already_exists";
         }

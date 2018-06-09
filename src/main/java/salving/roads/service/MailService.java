@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ResourceUtils;
 import org.xml.sax.InputSource;
+import salving.roads.domain.Note;
 import salving.roads.domain.ProblemPoint;
+import salving.roads.domain.User;
 import salving.roads.repository.NotesRepository;
 import salving.roads.repository.ProblemPointRepository;
 
@@ -18,6 +20,7 @@ import javax.mail.internet.MimeMessage;
 import java.io.*;
 import java.net.URISyntaxException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -94,6 +97,36 @@ public class MailService {
 
             try {
                 Template temp = cfg.getTemplate("Mail.ftlh");
+                temp.process(root, writer);
+            } catch (IOException | TemplateException e) {
+                e.printStackTrace();
+            }
+
+            return writer.toString();
+        } else {
+            return "Point not found";
+        }
+    }
+
+    public String buildUserMessage(long pointId, User user) {
+        if (pointRepository.existsById(pointId)) {
+            ProblemPoint point = pointRepository.findById(pointId);
+
+            Map<String, Object> root = new HashMap<>();
+            root.put("longitude", String.valueOf(point.getLongitude()));
+            root.put("latitude", String.valueOf(point.getLatitude()));
+
+            List<Note> notes = point.getNotes();
+            for(Note note : notes) {
+                if (note.getAuthor().equals(user)) {
+                    root.put("note", note);
+                }
+            }
+
+            Writer writer = new StringWriter();
+
+            try {
+                Template temp = cfg.getTemplate("UserMail.ftlh");
                 temp.process(root, writer);
             } catch (IOException | TemplateException e) {
                 e.printStackTrace();
