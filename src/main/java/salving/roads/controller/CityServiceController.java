@@ -38,8 +38,7 @@ public class CityServiceController {
 
         String message = mailService.buildUserMessage(id, user);
         if(!message.equals("Point not found")) {
-            mailService.send(message, "pmfr@yandex.ru");
-            mailService.send(message, "sergey.2123@yandex.ru");
+            mailService.send(message, user.getEmail());
             return "Message_sent_successfully";
         } else {
             return "Point_not_found";
