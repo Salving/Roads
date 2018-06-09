@@ -18,6 +18,10 @@ public class Note {
     @JoinColumn(name = "point_id")
     private ProblemPoint point;
 
+    @ManyToOne(optional = false, targetEntity = User.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "author")
+    private User author;
+
     protected Note() {
     }
 

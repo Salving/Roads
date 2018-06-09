@@ -24,7 +24,7 @@ public class ProblemPoint implements Serializable {
     private double longitude;
 
     @Column(nullable = false, name = "rating", columnDefinition = "long default '1'")
-    private int rating ;
+    private int rating;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = TimeUtils.DATE_FORMAT)
     @Column(nullable = false, name = "creation_time")

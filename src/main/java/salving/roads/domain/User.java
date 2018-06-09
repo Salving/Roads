@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @JsonIgnoreProperties({"password"})
 @Entity
@@ -26,6 +27,9 @@ public class User implements Serializable {
 
     @Column(nullable = false, name = "points", columnDefinition = "long default '0'")
     private long points;
+
+    @OneToMany(mappedBy = "author")
+    private List<Note> notes;
 
     protected  User() {}
 
